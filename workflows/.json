@@ -1,0 +1,1095 @@
+{
+  "data": [
+    {
+      "createdAt": "2023-09-15T17:15:55.600Z",
+      "updatedAt": "2023-09-15T20:06:06.000Z",
+      "id": "GsifgUXjijgO0Vza",
+      "name": "Database backup",
+      "active": true,
+      "nodes": [
+        {
+          "parameters": {
+            "pollTimes": {
+              "item": [
+                {
+                  "hour": 15,
+                  "minute": 30
+                }
+              ]
+            },
+            "filters": {
+              "labelIds": [
+                "Label_1045517051500921590"
+              ]
+            }
+          },
+          "id": "136e7052-27c2-488d-9d7f-f2c4e8bedc1a",
+          "name": "Gmail Trigger",
+          "type": "n8n-nodes-base.gmailTrigger",
+          "typeVersion": 1,
+          "position": [
+            1000,
+            540
+          ],
+          "credentials": {
+            "gmailOAuth2": {
+              "id": "DEsuj9Rbgf1KVTmo",
+              "name": "Gmail account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "authentication": "serviceAccount",
+            "operation": "appendOrUpdate",
+            "documentId": {
+              "__rl": true,
+              "value": "1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU",
+              "mode": "list",
+              "cachedResultName": "Mail Daily Track",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit?usp=drivesdk"
+            },
+            "sheetName": {
+              "__rl": true,
+              "value": 1699660329,
+              "mode": "list",
+              "cachedResultName": "SEP 2023",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit#gid=1699660329"
+            },
+            "columns": {
+              "mappingMode": "defineBelow",
+              "value": {
+                "Date": "={{ $json.Subject.substring(18,20) }}",
+                "Database Backup": "Received"
+              },
+              "matchingColumns": [
+                "Date"
+              ],
+              "schema": [
+                {
+                  "id": "Date",
+                  "displayName": "Date",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true,
+                  "removed": false
+                },
+                {
+                  "id": "RDS Listing",
+                  "displayName": "RDS Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "EC2 Listing",
+                  "displayName": "EC2 Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "License report",
+                  "displayName": "License report",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Database Backup",
+                  "displayName": "Database Backup",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Data Feed Monitor",
+                  "displayName": "Data Feed Monitor",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                }
+              ]
+            },
+            "options": {}
+          },
+          "id": "f6ccb527-02fa-4689-812e-b44b9b486615",
+          "name": "Google Sheets",
+          "type": "n8n-nodes-base.googleSheets",
+          "typeVersion": 4,
+          "position": [
+            1220,
+            540
+          ],
+          "credentials": {
+            "googleApi": {
+              "id": "ihWoB4rTPJyo5fGU",
+              "name": "Google Sheets account"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Gmail Trigger": {
+          "main": [
+            [
+              {
+                "node": "Google Sheets",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1"
+      },
+      "staticData": {
+        "node:Gmail Trigger": {
+          "lastTimeChecked": 1694808365
+        }
+      },
+      "pinData": {},
+      "versionId": "35400f72-5236-49b8-a438-1a99a338e217",
+      "triggerCount": 1,
+      "tags": [
+        {
+          "createdAt": "2023-09-15T13:43:34.216Z",
+          "updatedAt": "2023-09-15T13:43:34.216Z",
+          "id": "udPW0thzFka46Z9P",
+          "name": "Daily mail track"
+        }
+      ]
+    },
+    {
+      "createdAt": "2023-09-15T18:32:36.367Z",
+      "updatedAt": "2023-09-15T18:42:57.000Z",
+      "id": "POg6XdJxTTedAdHK",
+      "name": "Not recieved",
+      "active": true,
+      "nodes": [
+        {
+          "parameters": {
+            "rule": {
+              "interval": [
+                {
+                  "triggerAtHour": 18
+                }
+              ]
+            }
+          },
+          "id": "9ae4eb82-76e7-4fa7-bfc7-f023113de07c",
+          "name": "Schedule Trigger",
+          "type": "n8n-nodes-base.scheduleTrigger",
+          "typeVersion": 1.1,
+          "position": [
+            620,
+            260
+          ]
+        },
+        {
+          "parameters": {
+            "authentication": "serviceAccount",
+            "documentId": {
+              "__rl": true,
+              "value": "1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU",
+              "mode": "list",
+              "cachedResultName": "Mail Daily Track",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit?usp=drivesdk"
+            },
+            "sheetName": {
+              "__rl": true,
+              "value": 1699660329,
+              "mode": "list",
+              "cachedResultName": "SEP 2023",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit#gid=1699660329"
+            },
+            "filtersUI": {
+              "values": [
+                {
+                  "lookupColumn": "Date",
+                  "lookupValue": "={{ $today.day }}"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "id": "2adbdb82-03e0-4b6a-b5f5-d471a519ebb5",
+          "name": "Google Sheets",
+          "type": "n8n-nodes-base.googleSheets",
+          "typeVersion": 4,
+          "position": [
+            840,
+            260
+          ],
+          "credentials": {
+            "googleApi": {
+              "id": "ihWoB4rTPJyo5fGU",
+              "name": "Google Sheets account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "authentication": "serviceAccount",
+            "operation": "appendOrUpdate",
+            "documentId": {
+              "__rl": true,
+              "value": "1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU",
+              "mode": "list",
+              "cachedResultName": "Mail Daily Track",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit?usp=drivesdk"
+            },
+            "sheetName": {
+              "__rl": true,
+              "value": 1699660329,
+              "mode": "list",
+              "cachedResultName": "SEP 2023",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit#gid=1699660329"
+            },
+            "columns": {
+              "mappingMode": "defineBelow",
+              "value": {
+                "RDS Listing": "={{ $json['RDS Listing']==\"Received\" ? \"Received\" : \"Not received\"}}",
+                "EC2 Listing": "={{ $json['EC2 Listing']==\"Received\" ? \"Received\" : \"Not received\"}}",
+                "License report": "={{ $json['License report']==\"Received\" ? \"Received\" : \"Not received\"}}",
+                "Database Backup": "={{ $json['Database Backup']==\"Received\" ? \"Received\" : \"Not received\"}}",
+                "Data Feed Monitor": "={{ $json['Data Feed Monitor']==\"Received\" ? \"Received\" : \"Not received\"}}",
+                "Date": "={{ $today.day }}"
+              },
+              "matchingColumns": [
+                "Date"
+              ],
+              "schema": [
+                {
+                  "id": "Date",
+                  "displayName": "Date",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true,
+                  "removed": false
+                },
+                {
+                  "id": "RDS Listing",
+                  "displayName": "RDS Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true,
+                  "removed": false
+                },
+                {
+                  "id": "EC2 Listing",
+                  "displayName": "EC2 Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "License report",
+                  "displayName": "License report",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Database Backup",
+                  "displayName": "Database Backup",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Data Feed Monitor",
+                  "displayName": "Data Feed Monitor",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                }
+              ]
+            },
+            "options": {}
+          },
+          "id": "53a5b5d8-bc00-498b-b19a-58e4d1994ca9",
+          "name": "Google Sheets1",
+          "type": "n8n-nodes-base.googleSheets",
+          "typeVersion": 4,
+          "position": [
+            1060,
+            260
+          ],
+          "credentials": {
+            "googleApi": {
+              "id": "ihWoB4rTPJyo5fGU",
+              "name": "Google Sheets account"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Schedule Trigger": {
+          "main": [
+            [
+              {
+                "node": "Google Sheets",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Google Sheets": {
+          "main": [
+            [
+              {
+                "node": "Google Sheets1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1"
+      },
+      "staticData": {
+        "node:Schedule Trigger": {
+          "recurrencyRules": []
+        }
+      },
+      "pinData": {},
+      "versionId": "859054e7-56ae-4bb8-8f7f-4cdac10108b9",
+      "triggerCount": 1,
+      "tags": [
+        {
+          "createdAt": "2023-09-15T13:43:34.216Z",
+          "updatedAt": "2023-09-15T13:43:34.216Z",
+          "id": "udPW0thzFka46Z9P",
+          "name": "Daily mail track"
+        }
+      ]
+    },
+    {
+      "createdAt": "2023-09-15T17:21:08.174Z",
+      "updatedAt": "2023-09-15T20:06:06.000Z",
+      "id": "UqVbAQsyy111EkIg",
+      "name": "Data Feed Monitor",
+      "active": true,
+      "nodes": [
+        {
+          "parameters": {
+            "pollTimes": {
+              "item": [
+                {
+                  "hour": 15,
+                  "minute": 30
+                }
+              ]
+            },
+            "filters": {
+              "labelIds": [
+                "Label_1045517051500921590"
+              ]
+            }
+          },
+          "id": "a0e60495-3490-42fd-a737-fa402602c6a6",
+          "name": "Gmail Trigger",
+          "type": "n8n-nodes-base.gmailTrigger",
+          "typeVersion": 1,
+          "position": [
+            1000,
+            540
+          ],
+          "credentials": {
+            "gmailOAuth2": {
+              "id": "DEsuj9Rbgf1KVTmo",
+              "name": "Gmail account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "authentication": "serviceAccount",
+            "operation": "appendOrUpdate",
+            "documentId": {
+              "__rl": true,
+              "value": "1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU",
+              "mode": "list",
+              "cachedResultName": "Mail Daily Track",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit?usp=drivesdk"
+            },
+            "sheetName": {
+              "__rl": true,
+              "value": 1699660329,
+              "mode": "list",
+              "cachedResultName": "SEP 2023",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit#gid=1699660329"
+            },
+            "columns": {
+              "mappingMode": "defineBelow",
+              "value": {
+                "Date": "={{ $today.day  }}",
+                "Database Backup": "Received"
+              },
+              "matchingColumns": [
+                "Date"
+              ],
+              "schema": [
+                {
+                  "id": "Date",
+                  "displayName": "Date",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true,
+                  "removed": false
+                },
+                {
+                  "id": "RDS Listing",
+                  "displayName": "RDS Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "EC2 Listing",
+                  "displayName": "EC2 Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "License report",
+                  "displayName": "License report",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Database Backup",
+                  "displayName": "Database Backup",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Data Feed Monitor",
+                  "displayName": "Data Feed Monitor",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                }
+              ]
+            },
+            "options": {}
+          },
+          "id": "1a4c62f8-62f7-4d79-9211-1a4d547a8c08",
+          "name": "Google Sheets",
+          "type": "n8n-nodes-base.googleSheets",
+          "typeVersion": 4,
+          "position": [
+            1220,
+            540
+          ],
+          "credentials": {
+            "googleApi": {
+              "id": "ihWoB4rTPJyo5fGU",
+              "name": "Google Sheets account"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Gmail Trigger": {
+          "main": [
+            [
+              {
+                "node": "Google Sheets",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1"
+      },
+      "staticData": {
+        "node:Gmail Trigger": {
+          "lastTimeChecked": 1694808366
+        }
+      },
+      "pinData": {},
+      "versionId": "2d3cbb53-c895-4d28-a795-a5b2cd6b3571",
+      "triggerCount": 1,
+      "tags": [
+        {
+          "createdAt": "2023-09-15T13:43:34.216Z",
+          "updatedAt": "2023-09-15T13:43:34.216Z",
+          "id": "udPW0thzFka46Z9P",
+          "name": "Daily mail track"
+        }
+      ]
+    },
+    {
+      "createdAt": "2023-09-15T13:43:35.620Z",
+      "updatedAt": "2023-09-15T20:06:04.000Z",
+      "id": "VCuBKevjGsgIMB5i",
+      "name": "RDS Listing",
+      "active": true,
+      "nodes": [
+        {
+          "parameters": {
+            "pollTimes": {
+              "item": [
+                {
+                  "hour": 10,
+                  "minute": 30
+                }
+              ]
+            },
+            "filters": {
+              "labelIds": [
+                "Label_3304369223057772859"
+              ]
+            }
+          },
+          "id": "77f24833-c996-4d51-a84b-657d00ad8aad",
+          "name": "Gmail Trigger",
+          "type": "n8n-nodes-base.gmailTrigger",
+          "typeVersion": 1,
+          "position": [
+            1000,
+            540
+          ],
+          "credentials": {
+            "gmailOAuth2": {
+              "id": "DEsuj9Rbgf1KVTmo",
+              "name": "Gmail account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "authentication": "serviceAccount",
+            "operation": "appendOrUpdate",
+            "documentId": {
+              "__rl": true,
+              "value": "1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU",
+              "mode": "list",
+              "cachedResultName": "Mail Daily Track",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit?usp=drivesdk"
+            },
+            "sheetName": {
+              "__rl": true,
+              "value": 1699660329,
+              "mode": "list",
+              "cachedResultName": "SEP 2023",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit#gid=1699660329"
+            },
+            "columns": {
+              "mappingMode": "defineBelow",
+              "value": {
+                "Date": "={{ $json.Subject.substring(24,26) }}",
+                "RDS Listing": "Received"
+              },
+              "matchingColumns": [
+                "Date"
+              ],
+              "schema": [
+                {
+                  "id": "Date",
+                  "displayName": "Date",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true,
+                  "removed": false
+                },
+                {
+                  "id": "RDS Listing",
+                  "displayName": "RDS Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "EC2 Listing",
+                  "displayName": "EC2 Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "License report",
+                  "displayName": "License report",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Database Backup",
+                  "displayName": "Database Backup",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Data Feed Monitor",
+                  "displayName": "Data Feed Monitor",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                }
+              ]
+            },
+            "options": {}
+          },
+          "id": "bbbe9604-cfd5-4788-8f9d-bf875cd31d9b",
+          "name": "Google Sheets",
+          "type": "n8n-nodes-base.googleSheets",
+          "typeVersion": 4,
+          "position": [
+            1220,
+            540
+          ],
+          "credentials": {
+            "googleApi": {
+              "id": "ihWoB4rTPJyo5fGU",
+              "name": "Google Sheets account"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Gmail Trigger": {
+          "main": [
+            [
+              {
+                "node": "Google Sheets",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1"
+      },
+      "staticData": {
+        "node:Gmail Trigger": {
+          "lastTimeChecked": 1694808364
+        }
+      },
+      "pinData": {},
+      "versionId": "42e52501-c62a-4b96-888b-c4cf053a84fb",
+      "triggerCount": 1,
+      "tags": [
+        {
+          "createdAt": "2023-09-15T13:43:34.216Z",
+          "updatedAt": "2023-09-15T13:43:34.216Z",
+          "id": "udPW0thzFka46Z9P",
+          "name": "Daily mail track"
+        }
+      ]
+    },
+    {
+      "createdAt": "2023-09-15T13:47:43.584Z",
+      "updatedAt": "2023-09-15T20:06:05.000Z",
+      "id": "jCVsWkuixlqUzCBw",
+      "name": "License Report",
+      "active": true,
+      "nodes": [
+        {
+          "parameters": {
+            "pollTimes": {
+              "item": [
+                {
+                  "hour": 13,
+                  "minute": 30
+                }
+              ]
+            },
+            "filters": {
+              "labelIds": [
+                "Label_2288806609444472110"
+              ]
+            }
+          },
+          "id": "11beb6a2-6c32-47bf-8c9b-0662d931717b",
+          "name": "Gmail Trigger",
+          "type": "n8n-nodes-base.gmailTrigger",
+          "typeVersion": 1,
+          "position": [
+            1000,
+            540
+          ],
+          "credentials": {
+            "gmailOAuth2": {
+              "id": "DEsuj9Rbgf1KVTmo",
+              "name": "Gmail account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "authentication": "serviceAccount",
+            "operation": "appendOrUpdate",
+            "documentId": {
+              "__rl": true,
+              "value": "1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU",
+              "mode": "list",
+              "cachedResultName": "Mail Daily Track",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit?usp=drivesdk"
+            },
+            "sheetName": {
+              "__rl": true,
+              "value": 1699660329,
+              "mode": "list",
+              "cachedResultName": "SEP 2023",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit#gid=1699660329"
+            },
+            "columns": {
+              "mappingMode": "defineBelow",
+              "value": {
+                "Date": "={{ $json.Subject.substring(17,19) }}",
+                "License report": "Received"
+              },
+              "matchingColumns": [
+                "Date"
+              ],
+              "schema": [
+                {
+                  "id": "Date",
+                  "displayName": "Date",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true,
+                  "removed": false
+                },
+                {
+                  "id": "RDS Listing",
+                  "displayName": "RDS Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "EC2 Listing",
+                  "displayName": "EC2 Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "License report",
+                  "displayName": "License report",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Database Backup",
+                  "displayName": "Database Backup",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Data Feed Monitor",
+                  "displayName": "Data Feed Monitor",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                }
+              ]
+            },
+            "options": {}
+          },
+          "id": "b5f4a8af-fae8-4d08-aa51-d443d15cebcd",
+          "name": "Google Sheets",
+          "type": "n8n-nodes-base.googleSheets",
+          "typeVersion": 4,
+          "position": [
+            1220,
+            540
+          ],
+          "credentials": {
+            "googleApi": {
+              "id": "ihWoB4rTPJyo5fGU",
+              "name": "Google Sheets account"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Gmail Trigger": {
+          "main": [
+            [
+              {
+                "node": "Google Sheets",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1"
+      },
+      "staticData": {
+        "node:Gmail Trigger": {
+          "lastTimeChecked": 1694808364
+        }
+      },
+      "pinData": {},
+      "versionId": "70aa20fe-b821-45f9-a258-6d5faa9c529a",
+      "triggerCount": 1,
+      "tags": [
+        {
+          "createdAt": "2023-09-15T13:43:34.216Z",
+          "updatedAt": "2023-09-15T13:43:34.216Z",
+          "id": "udPW0thzFka46Z9P",
+          "name": "Daily mail track"
+        }
+      ]
+    },
+    {
+      "createdAt": "2023-09-15T07:19:01.861Z",
+      "updatedAt": "2023-09-15T20:06:04.000Z",
+      "id": "vNfobvmw9TwB5SBk",
+      "name": "EC2 Listing",
+      "active": true,
+      "nodes": [
+        {
+          "parameters": {
+            "pollTimes": {
+              "item": [
+                {
+                  "hour": 10,
+                  "minute": 30
+                }
+              ]
+            },
+            "filters": {
+              "labelIds": [
+                "Label_1919435149269734636"
+              ]
+            }
+          },
+          "id": "df80a4fe-9498-4dcc-9c05-9c8524f65744",
+          "name": "Gmail Trigger",
+          "type": "n8n-nodes-base.gmailTrigger",
+          "typeVersion": 1,
+          "position": [
+            1000,
+            540
+          ],
+          "credentials": {
+            "gmailOAuth2": {
+              "id": "DEsuj9Rbgf1KVTmo",
+              "name": "Gmail account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "authentication": "serviceAccount",
+            "operation": "appendOrUpdate",
+            "documentId": {
+              "__rl": true,
+              "value": "1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU",
+              "mode": "list",
+              "cachedResultName": "Mail Daily Track",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit?usp=drivesdk"
+            },
+            "sheetName": {
+              "__rl": true,
+              "value": 1699660329,
+              "mode": "list",
+              "cachedResultName": "SEP 2023",
+              "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kTfGbuRcqGnynJm6B6_FR-s_pRgliaBkgXYkkrUcaQU/edit#gid=1699660329"
+            },
+            "columns": {
+              "mappingMode": "defineBelow",
+              "value": {
+                "Date": "={{ $json.Subject.substring(16,18) }}",
+                "EC2 Listing": "Received"
+              },
+              "matchingColumns": [
+                "Date"
+              ],
+              "schema": [
+                {
+                  "id": "Date",
+                  "displayName": "Date",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true,
+                  "removed": false
+                },
+                {
+                  "id": "RDS Listing",
+                  "displayName": "RDS Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "EC2 Listing",
+                  "displayName": "EC2 Listing",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "License report",
+                  "displayName": "License report",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Database Backup",
+                  "displayName": "Database Backup",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                },
+                {
+                  "id": "Data Feed Monitor",
+                  "displayName": "Data Feed Monitor",
+                  "required": false,
+                  "defaultMatch": false,
+                  "display": true,
+                  "type": "string",
+                  "canBeUsedToMatch": true
+                }
+              ]
+            },
+            "options": {}
+          },
+          "id": "a8ecf65c-5586-4719-84e8-f0580f140da6",
+          "name": "Google Sheets",
+          "type": "n8n-nodes-base.googleSheets",
+          "typeVersion": 4,
+          "position": [
+            1220,
+            540
+          ],
+          "credentials": {
+            "googleApi": {
+              "id": "ihWoB4rTPJyo5fGU",
+              "name": "Google Sheets account"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Gmail Trigger": {
+          "main": [
+            [
+              {
+                "node": "Google Sheets",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1"
+      },
+      "staticData": {
+        "node:Gmail Trigger": {
+          "lastTimeChecked": 1694808363
+        }
+      },
+      "pinData": {},
+      "versionId": "86b3524a-d64d-47ed-8cc9-68e9017f6245",
+      "triggerCount": 1,
+      "tags": [
+        {
+          "createdAt": "2023-09-15T13:43:34.216Z",
+          "updatedAt": "2023-09-15T13:43:34.216Z",
+          "id": "udPW0thzFka46Z9P",
+          "name": "Daily mail track"
+        }
+      ]
+    }
+  ],
+  "nextCursor": null
+}
